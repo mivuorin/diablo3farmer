@@ -1,0 +1,42 @@
+﻿@using System.Web.Optimization
+@model dynamic
+
+<!DOCTYPE html>
+<html xmlns:ng="http://angularjs.org" ng-app="Diablo3Farmer" lang="en">
+    <head>
+        <title>Diablo 3 Farmer</title>
+        @Styles.Render("~/css")
+    </head>
+    <body>
+        TODO
+        <ul>
+            <li>Fix UI</li>
+            <li>Fix scripts locations to follow angular seed project</li>
+            <li>Add angular end to end test</li>
+            <li>Group runs by name</li>
+            <li>Add run name suggestions feature</li>
+            <li>Delete run feature</li>
+            <li>Gold / hour feature</li>
+            <li>Persist runs to localstore (should also load last run)</li>
+            <li>Loot: blues, rares, legendaries feature</li>
+            <li>Add warning if browser does not support local storage or other fearures required by app</li>
+        </ul>
+        <div ng-controller="FarmRunController">
+            <div ng-show="!runStarted()">
+                Run: <input type="text" ng-model="description" />
+                <select ng-model="selectedMonsterPowerLevel" ng-options="mp for mp in monsterPowerLevels"></select>
+                Act: <select ng-model="selectedAct" ng-options="act for act in acts"></select>
+                Exp: <input type="text" ng-model="startExp" />
+                <button ng-click="startRun()">Start run!</button>
+            </div>
+            <div ng-show="runStarted()">
+                End exp: <input type="text" ng-model="endExp" />
+                <button ng-click="endRun()">End run.</button>
+            </div>
+            <hr/>
+            <div class="gridStyle" ng-grid="gridOptions"></div>
+        </div>
+        @Scripts.Render("~/js/lib")
+        @Scripts.Render("~/js")
+    </body>
+</html>
