@@ -8,19 +8,6 @@
         @Styles.Render("~/css")
     </head>
     <body>
-        TODO
-        <ul>
-            <li>Fix UI</li>
-            <li>Fix scripts locations to follow angular seed project</li>
-            <li>Add angular end to end test</li>
-            <li>Group runs by name</li>
-            <li>Add run name suggestions feature</li>
-            <li>Delete run feature</li>
-            <li>Gold / hour feature</li>
-            <li>Persist runs to localstore (should also load last run)</li>
-            <li>Loot: blues, rares, legendaries feature</li>
-            <li>Add warning if browser does not support local storage or other fearures required by app</li>
-        </ul>
         <div ng-controller="FarmRunController">
             <div ng-show="!runStarted()">
                 Run: <input type="text" ng-model="description" />
