@@ -8,13 +8,14 @@ and calculate how good run was.
 Side goal of project is to learn AngularJS and develop small app in it.
 
 TODO:
- * Fix UI
+ * Create styles and better UI layout
  * Fix scripts locations to follow angular seed project
  * Add angular end to end test
  * Group runs by name
  * Add run name suggestions feature
  * Delete run feature
  * Gold / hour feature
- * Persist runs to localstore (should also load last run)
  * Loot: blues, rares, legendaries feature
  * Add warning if browser does not support local storage or other fearures required by app
+ * Add info or about view and use Angular view for that
+ * Persist last run to locastore
