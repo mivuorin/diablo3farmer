@@ -115,6 +115,12 @@ describe('FarmRunController', function() {
             scope.startRun();
             expect(scope.runStarted()).toBe(true);
         });
+
+        it('should prefill endExp to startExp', function() {
+            scope.startExp = 213;
+            scope.startRun();
+            expect(scope.endExp).toBe(scope.startExp);
+        });
     });
 
     describe('when ending farming run', function() {
