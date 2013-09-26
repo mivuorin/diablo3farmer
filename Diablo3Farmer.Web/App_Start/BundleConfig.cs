@@ -11,7 +11,7 @@ namespace Diablo3Farmer.Web
                     "~/Scripts/Lib/jquery-{version}.js",
                     "~/Scripts/Lib/bootstrap.js",
                     "~/Scripts/Lib/angular-1.2.0-rc.2/angular.js",
-                    //"~/Scripts/Lib/ui-bootstrap-0.6.0/ui-bootstrap-{version}.js",
+                    "~/Scripts/Lib/ui-bootstrap-0.6.0/ui-bootstrap-{version}.js",
                     "~/Scripts/Lib/underscore/underscore.js",
                     "~/Scripts/Lib/ng-grid-{version}.js"
                 );

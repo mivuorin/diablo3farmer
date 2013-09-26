@@ -12,10 +12,9 @@ angular.module('Diablo3Farmer.Controllers', [])
             { name: 'Act 3', value: 3, },
             { name: 'Act 4', value: 4, }
         ];
-        
         $scope.selectedAct = $scope.acts[0];
-        $scope.runs = runStorageService.load();
-        $scope.runGroups =  _.groupBy($scope.runs, "name"); // TODO Untested hack
+
+        $scope.runs =  runStorageService.load();
         $scope.name = '';
         $scope.currentRun = null;
         
@@ -48,18 +47,22 @@ angular.module('Diablo3Farmer.Controllers', [])
 
         $scope.endRun = function() {
             var run = $scope.currentRun;
-
             run.endExp = $scope.endExp;
             run.endTime = dateService.now();
+            
             var elapsedSeconds = (run.endTime - run.startTime) / 1000;
             var totalExp = run.endExp - run.startExp;
             run.expPerHour = Math.round((totalExp / elapsedSeconds) * 3600);
 
-            $scope.runs.push(run);
+            if (run.name in $scope.runs) {
+                $scope.runs[run.name].push(run);
+            } else {
+                $scope.runs[run.name] = [run];
+            }
+
             $scope.currentRun = null;
             $scope.startExp = run.endExp;
 
-            $scope.runGroups =  _.groupBy($scope.runs, "name");
             runStorageService.save($scope.runs);
         };
 

@@ -32,10 +32,10 @@ describe('runStorageService', function() {
             expect(windowSpy.localStorage.getItem).toHaveBeenCalledWith('Diablo3Farmer.runs');
         });
 
-        it('should return empty array if item is not found', function() {
+        it('should return empty object if item is not found', function() {
             windowSpy.localStorage.getItem.andReturn(null);
             var result = runStorageService.load();
-            expect(result).toEqual([]);
+            expect(result).toEqual({});
         });
 
         it('should parse item to JSON', function () {

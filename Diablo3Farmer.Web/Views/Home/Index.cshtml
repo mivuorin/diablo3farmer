@@ -57,9 +57,9 @@
                             <th>End Exp</th>
                             <th>Exp / hour</th>
                         </tr>
-                        <tbody ng-repeat="(name, runs) in runGroups">
-                            <tr ng-repeat="run in runs">
-                                <td rowspan="{{runs.length}}" ng-if="$first">{{name}}</td>
+                        <tbody ng-repeat="(groupName, group) in runs">
+                            <tr ng-repeat="run in group">
+                                <td rowspan="{{group.length}}" ng-if="$first">{{groupName}}</td>
                                 <td>{{run.monsterPowerLevel}}</td>
                                 <td>{{run.act.value}}</td>
                                 <td>{{run.startExp | number:0 }}</td>
@@ -68,11 +68,6 @@
                             </tr>
                         </tbody>
                     </table>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="gridStyle" ng-grid="gridOptions"></div>
                 </div>
             </div>
         </div>

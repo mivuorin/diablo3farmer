@@ -22,7 +22,7 @@ describe('FarmRunController', function() {
             $provide.value('runStoreService', runStorageServiceSpy);
         });
 
-        runStorageServiceSpy.load.andReturn([]);
+        runStorageServiceSpy.load.andReturn({});
 
         inject(function($rootScope, $controller) {
             scope = $rootScope.$new();
@@ -58,7 +58,7 @@ describe('FarmRunController', function() {
 
         it('should get runs from run store', function () {
             expect(runStorageServiceSpy.load).toHaveBeenCalled();
-            expect(scope.runs).toEqual([]);
+            expect(scope.runs).toEqual({});
         });
     });
 
@@ -140,7 +140,7 @@ describe('FarmRunController', function() {
             scope.endExp = 750;
             scope.endRun();
             
-            var run = scope.runs[0];
+            var run = scope.runs[runName][0];
             expect(run.endExp).toBe(750);
         });
 
@@ -157,7 +157,7 @@ describe('FarmRunController', function() {
             scope.endExp = 750;
             scope.endRun();
             
-            var run = scope.runs[0];
+            var run = scope.runs[runName][0];
             expect(run.expPerHour).toBe(750);
         });
         
@@ -184,27 +184,7 @@ describe('FarmRunController', function() {
             startRun(500);
             scope.endRun();
 
-            expect(scope.runGroups[runName].length).toBe(2);
-        });
-    });
-
-    describe('getRunGroups', function() {
-        it('should return runs grouped by name', function () {
-            scope.runs = [{ name: "a" }, { name: "b" }, { name: "a" }];
-            var groups = scope.getRunGroups();
-            
-            expect(groups["a"].length).toBe(2);
-            expect(groups["b"].length).toBe(1);
-        });
-    });
-
-    describe('js associative array test', function() {
-        it('test adding associative stuff', function() {
-            var arr = {};
-            
-            if (arr["test"] === null) {
-
-            }
+            expect(scope.runs[runName].length).toBe(2);
         });
     });
 });
