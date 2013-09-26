@@ -67,7 +67,7 @@ angular.module('Diablo3Farmer.Controllers', [])
             runStorageService.save($scope.runs);
         };
 
-        $scope.getRunGroups = function () {
-            return  _.groupBy($scope.runs, "name");
+        $scope.getRunNames = function () {
+            return _.keys($scope.runs);
         };
     }]);

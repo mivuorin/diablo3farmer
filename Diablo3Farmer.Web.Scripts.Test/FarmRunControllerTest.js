@@ -193,4 +193,16 @@ describe('FarmRunController', function() {
             expect(scope.runs[runName].length).toBe(2);
         });
     });
+
+    describe('getRunNames', function() {
+        it('should return run names as array from runs', function() {
+            scope.runs = {
+                'a': [{ name: 'a' }, { name: 'a' }],
+                'b': [{ name: 'b' }, { name: 'b' }],
+            };
+            var runNames = scope.getRunNames();
+
+            expect(runNames).toEqual(['a', 'b']);
+        });
+    });
 });
