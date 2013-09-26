@@ -36,11 +36,11 @@
     <Content Include="..\Diablo3Farmer.Web\Scripts\Controllers.js">
       <Link>Scripts\Controllers.js</Link>
     </Content>
-    <Content Include="..\Diablo3Farmer.Web\Scripts\Lib\angular-mocks.js">
-      <Link>Scripts\Lib\angular-mocks.js</Link>
+    <Content Include="..\Diablo3Farmer.Web\Scripts\Lib\angular-1.2.0-rc.2\angular-mocks.js">
+      <Link>Scripts\Lib\angular-1.2.0-rc.2\angular-mocks.js</Link>
     </Content>
-    <Content Include="..\Diablo3Farmer.Web\Scripts\Lib\angular.js">
-      <Link>Scripts\Lib\angular.js</Link>
+    <Content Include="..\Diablo3Farmer.Web\Scripts\Lib\angular-1.2.0-rc.2\angular.js">
+      <Link>Scripts\Lib\angular-1.2.0-rc.2\angular.js</Link>
     </Content>
     <Content Include="..\Diablo3Farmer.Web\Scripts\Services.js">
       <Link>Scripts\Services.js</Link>
