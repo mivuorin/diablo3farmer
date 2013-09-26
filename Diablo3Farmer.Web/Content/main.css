@@ -1,4 +1,6 @@
 ﻿body {
+    padding-top: 20px;
+    padding-bottom: 30px;
 }
 
 /*style.css*/
@@ -6,3 +8,11 @@
     border: 1px solid rgb(212,212,212);
     height: 500px;
 }
+
+.form-inline .control-label {
+    color: red;
+}
+
+/*.form-inline .form-group {
+    display: inline;
+}*/

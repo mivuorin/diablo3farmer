@@ -5,23 +5,52 @@
 <html xmlns:ng="http://angularjs.org" ng-app="Diablo3Farmer" lang="en">
     <head>
         <title>Diablo 3 Farmer</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         @Styles.Render("~/css")
     </head>
     <body>
-        <div ng-controller="FarmRunController">
-            <div ng-show="!runStarted()">
-                Run: <input type="text" ng-model="description" />
-                <select ng-model="selectedMonsterPowerLevel" ng-options="mp for mp in monsterPowerLevels"></select>
-                Act: <select ng-model="selectedAct" ng-options="act for act in acts"></select>
-                Exp: <input type="text" ng-model="startExp" />
-                <button ng-click="startRun()">Start run!</button>
+        <div class="container" ng-controller="FarmRunController">
+            <div class="jumbotron">
+                <h1>Diablo 3 Farmer</h1>
+                <p>Awesome AngularJS app</p>
             </div>
-            <div ng-show="runStarted()">
-                End exp: <input type="text" ng-model="endExp" />
-                <button ng-click="endRun()">End run.</button>
+            <div class="row">
+                <div class="form-inline">
+                    <div ng-show="!runStarted()" class="col-lg-12">
+                        <div class="form-group input-group-sm">
+                            <label for="description" class="control-label">Run:</label>
+                            <input id="description" type="text" ng-model="description" class="form-control"/>
+                        </div>
+                        <div class="form-group input-group-sm">
+                            <label for="mpSelection" class="control-label">MP:</label>
+                            <select id="mpSelection" class="form-control" ng-model="selectedMonsterPowerLevel" ng-options="mp for mp in monsterPowerLevels"></select>
+                        </div>
+                        <div class="form-group input-group-sm">
+                            <label for="actSelection" class="control-label">Act:</label>
+                            <select id="actSelection" class="form-control" ng-model="selectedAct" ng-options="act as act.name for act in acts"></select>
+                        </div>
+                        <div class="form-group input-group-sm">
+                            <label for="startingExp" class="control-label">Start Exp:</label>
+                            <input id="startingExp" type="text" ng-model="startExp" class="form-control"/>
+                        </div>
+                        <div class="form-group input-group-sm">
+                            <button ng-click="startRun()" class="btn btn-default">Start run!</button>
+                        </div>
+                    </div>
+                    <div ng-show="runStarted()" class="col-lg-12">
+                        <div class="form-group input-group-sm">
+                            <label for="endExp">End exp:</label>
+                            <input id="endExp" type="text" ng-model="endExp" class="form-control" />
+                        </div>
+                        <button ng-click="endRun()" class="btn btn-default">End run.</button>
+                    </div>
+                </div>
             </div>
-            <hr/>
-            <div class="gridStyle" ng-grid="gridOptions"></div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="gridStyle" ng-grid="gridOptions"></div>
+                </div>
+            </div>
         </div>
         @Scripts.Render("~/js/lib")
         @Scripts.Render("~/js")

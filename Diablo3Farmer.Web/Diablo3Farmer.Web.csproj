@@ -128,10 +128,16 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Content\bootstrap\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap\bootstrap.css" />
+    <Content Include="Content\bootstrap\bootstrap.min.css" />
     <Content Include="Content\main.css" />
     <Content Include="Content\ng-grid.css" />
     <Content Include="Content\ng-grid.min.css" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\Lib\bootstrap.js" />
+    <Content Include="Scripts\Lib\bootstrap.min.js" />
     <Content Include="Scripts\Lib\angular-bootstrap-prettify.js" />
     <Content Include="Scripts\Lib\angular-bootstrap-prettify.min.js" />
     <Content Include="Scripts\Lib\angular-bootstrap.js" />
@@ -437,6 +443,10 @@
     <Content Include="Scripts\Lib\i18n\angular-locale_zh.js" />
     <Content Include="Scripts\Lib\i18n\angular-locale_zu-za.js" />
     <Content Include="Scripts\Lib\i18n\angular-locale_zu.js" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
     <None Include="Scripts\Lib\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\Lib\jquery-1.9.1.js" />
     <Content Include="Scripts\Lib\jquery-1.9.1.min.js" />

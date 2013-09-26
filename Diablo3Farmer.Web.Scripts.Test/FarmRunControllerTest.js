@@ -3,6 +3,7 @@
 /// <reference path="Scripts/Lib/angular-mocks.js" />
 /// <reference path="Scripts/Controllers.js" />
 'use strict';
+//Prevents jasmine to notify ReSharper for end of test run. Can be used on debuggin purposes.
 //jasmine.getEnv().currentRunner_.finishCallback = function () {};
 
 describe('FarmRunController', function() {
@@ -41,11 +42,7 @@ describe('FarmRunController', function() {
         });
 
         it('should set default act', function() {
-            expect(scope.selectedAct).toBe(1);
-        });
-
-        it('should return acts', function() {
-            expect(scope.acts).toEqual([1, 2, 3, 4]);
+            expect(scope.selectedAct).toEqual( scope.acts[0] );
         });
 
         it('default description should be empty', function() {
@@ -161,7 +158,7 @@ describe('FarmRunController', function() {
             var run = scope.runs[0];
             expect(run.expPerHour).toBe(750);
         });
-
+        
         it('should set start exp to finished experience', function() {
             startRun(6750);
             var endExp = 8557;
@@ -177,9 +174,5 @@ describe('FarmRunController', function() {
             scope.endRun();
             expect(runStorageServiceSpy.save).toHaveBeenCalledWith(scope.runs);
         });
-    });
-
-    describe('it should show currently active run', function () {
-        
     });
 });

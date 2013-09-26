@@ -9,6 +9,7 @@ namespace Diablo3Farmer.Web
             var jsLibs = new Bundle("~/js/lib")
                 .Include(
                     "~/Scripts/Lib/jquery-{version}.js",
+                    "~/Scripts/Lib/bootstrap.js",
                     "~/Scripts/Lib/angular.js",
                     "~/Scripts/Lib/ng-grid-{version}.js"
                 );
@@ -22,10 +23,13 @@ namespace Diablo3Farmer.Web
             bundles.Add(jsLibs);
             bundles.Add(jsApp);
 
-            bundles
-                .Add(
-                    new Bundle("~/css")
-                        .Include("~/Content/ng-grid.css", "~/Content/main.css"));
+            var css = new Bundle("~/css")
+                .Include(
+                    "~/Content/ng-grid.css",
+                    "~/Content/bootstrap/bootstrap.css",
+                    "~/Content/main.css",
+                    "~/Content/bootstrap/bootstrap-theme.css");
+            bundles.Add(css);
         }
     }
 }
