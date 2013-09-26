@@ -15,7 +15,7 @@ angular.module('Diablo3Farmer.Controllers', [])
         
         $scope.selectedAct = $scope.acts[0];
         $scope.runs = runStorageService.load();
-        $scope.description = '';
+        $scope.name = '';
         $scope.currentRun = null;
 
         $scope.runStarted = function() {
@@ -38,7 +38,7 @@ angular.module('Diablo3Farmer.Controllers', [])
             var run = {
                 monsterPowerLevel: $scope.selectedMonsterPowerLevel,
                 act: $scope.selectedAct,
-                description: $scope.description,
+                name: $scope.name,
                 startExp: $scope.startExp,
                 startTime: dateService.now()
             };
@@ -61,5 +61,12 @@ angular.module('Diablo3Farmer.Controllers', [])
             $scope.startExp = run.endExp;
 
             runStorageService.save($scope.runs);
+        };
+
+        $scope.getRunGroups = function() {
+            return {
+                'foo': [{ foo: 'f123', bar: 'asd2' }, { foo: 'f123', bar: 'asd2' }],
+                'bar': [{ foo: 'f 23', bar: 'a d2' }, { fo: 'f123', bar: 'asd2' }]
+            };
         };
     }]);

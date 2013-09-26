@@ -46,7 +46,7 @@ describe('FarmRunController', function() {
         });
 
         it('default description should be empty', function() {
-            expect(scope.description).toBe('');
+            expect(scope.name).toBe('');
         });
 
         it('should set run started to false', function () {
@@ -81,13 +81,13 @@ describe('FarmRunController', function() {
             expect(run.act).toBe(2);
         });
 
-        it('should set description', function() {
-            scope.description = "test";
+        it('should set run name', function() {
+            scope.name = "test";
 
             scope.startRun();
 
             var run = scope.currentRun;
-            expect(run.description).toBe("test");
+            expect(run.name).toBe("test");
         });
 
         it('should set starting exp', function() {
@@ -116,12 +116,11 @@ describe('FarmRunController', function() {
     });
 
     describe('when ending farming run', function() {
-
-        function startRun(startExperience) {
+        function startRun(startExp) {
             scope.selectedAct = 1;
             scope.selectedMonsterPowerLevel = 'MP02';
-            scope.description = 'Test run';
-            scope.startExp = startExperience;
+            scope.name = 'Test';
+            scope.startExp = startExp;
             
             scope.startRun();
         }
@@ -173,6 +172,19 @@ describe('FarmRunController', function() {
             startRun(500);
             scope.endRun();
             expect(runStorageServiceSpy.save).toHaveBeenCalledWith(scope.runs);
+        });
+    });
+
+    describe('getRunGroups() should return runs grouped by name', function() {
+        it('should return runs grouped by name', function() {
+            scope.runs = [{ name: "a" }, { name: "a" }, { name: "b" }];
+            var groups = scope.getRunGroups();
+            
+            expect(groups.size).toBe(2);
+        });
+
+        it('test grouping', function() {
+            
         });
     });
 });
