@@ -176,6 +176,16 @@ describe('FarmRunController', function() {
             scope.endRun();
             expect(runStorageServiceSpy.save).toHaveBeenCalledWith(scope.runs);
         });
+
+        it('should group runs by name', function() {
+            startRun(500);
+            scope.endRun();
+
+            startRun(500);
+            scope.endRun();
+
+            expect(scope.runGroups[runName].length).toBe(2);
+        });
     });
 
     describe('getRunGroups', function() {
@@ -185,6 +195,16 @@ describe('FarmRunController', function() {
             
             expect(groups["a"].length).toBe(2);
             expect(groups["b"].length).toBe(1);
+        });
+    });
+
+    describe('js associative array test', function() {
+        it('test adding associative stuff', function() {
+            var arr = {};
+            
+            if (arr["test"] === null) {
+
+            }
         });
     });
 });

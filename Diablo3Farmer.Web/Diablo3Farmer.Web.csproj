@@ -153,10 +153,10 @@
     <Content Include="Scripts\Lib\jquery-1.9.1.min.js" />
     <Content Include="Scripts\Lib\ng-grid-2.0.7.js" />
     <Content Include="Scripts\Lib\ng-grid-2.0.7.min.js" />
-    <Content Include="Scripts\Lib\ui-bootstrap-0.6.0.js" />
-    <Content Include="Scripts\Lib\ui-bootstrap-0.6.0.min.js" />
-    <Content Include="Scripts\Lib\ui-bootstrap-tpls-0.6.0.js" />
-    <Content Include="Scripts\Lib\ui-bootstrap-tpls-0.6.0.min.js" />
+    <Content Include="Scripts\Lib\ui-bootstrap-0.6.0\ui-bootstrap-0.6.0.js" />
+    <Content Include="Scripts\Lib\ui-bootstrap-0.6.0\ui-bootstrap-0.6.0.min.js" />
+    <Content Include="Scripts\Lib\ui-bootstrap-0.6.0\ui-bootstrap-tpls-0.6.0.js" />
+    <Content Include="Scripts\Lib\ui-bootstrap-0.6.0\ui-bootstrap-tpls-0.6.0.min.js" />
     <Content Include="Scripts\Services.js" />
     <Content Include="Scripts\Lib\underscore\underscore.js" />
     <Content Include="Scripts\Lib\underscore\underscore.min.js" />

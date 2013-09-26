@@ -9,6 +9,9 @@
     height: 500px;
 }
 
+/* Angular ui bootstrap fix */
+.nav, .pagination, .carousel a { cursor: pointer; }
+
 .form-inline .control-label {
     color: red;
 }
