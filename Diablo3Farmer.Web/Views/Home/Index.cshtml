@@ -48,6 +48,28 @@
             </div>
             <div class="row">
                 <div class="col-lg-12">
+                    <table class="table table-striped">
+                        <tr>
+                            <th>Run name</th>
+                            <th>MP</th>
+                            <th>Act</th>
+                            <th>Start Exp</th>
+                            <th>End Exp</th>
+                            <th>Exp/hour</th>
+                        </tr>
+                        <tr ng-repeat="run in runs">
+                            <td>{{run.description}}</td>
+                            <td>{{run.monsterPowerLevel}}</td>
+                            <td>{{run.act.value}}</td>
+                            <td>{{run.startExp}}</td>
+                            <td>{{run.endExp}}</td>
+                            <td>{{run.expPerHour}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
                     <div class="gridStyle" ng-grid="gridOptions"></div>
                 </div>
             </div>
