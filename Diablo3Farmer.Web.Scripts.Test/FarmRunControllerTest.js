@@ -1,6 +1,6 @@
 ﻿/// <reference path="Scripts/jasmine.js" />
-/// <reference path="Scripts/Lib/angular.js" />
-/// <reference path="Scripts/Lib/angular-mocks.js" />
+/// <reference path="Scripts/Lib/angular-1.2.0-rc.2/angular.js" />
+/// <reference path="Scripts/Lib/angular-1.2.0-rc.2/angular-mocks.js" />
 /// <reference path="Scripts/Controllers.js" />
 'use strict';
 //Prevents jasmine to notify ReSharper for end of test run. Can be used on debuggin purposes.

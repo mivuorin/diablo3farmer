@@ -1,6 +1,6 @@
 ﻿/// <reference path="Scripts/jasmine.js" />
-/// <reference path="Scripts/Lib/angular.js" />
-/// <reference path="Scripts/Lib/angular-mocks.js" />
+/// <reference path="Scripts/Lib/angular-1.2.0-rc.2/angular.js" />
+/// <reference path="Scripts/Lib/angular-1.2.0-rc.2/angular-mocks.js" />
 /// <reference path="Scripts/Services.js" />
 'use strict';
 
