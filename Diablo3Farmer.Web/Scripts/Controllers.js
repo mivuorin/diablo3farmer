@@ -25,7 +25,7 @@ angular.module('Diablo3Farmer.Controllers', [])
         $scope.gridOptions = {
             data: 'runs',
             columnDefs: [
-                { field: 'description', displayName: 'Run name' },
+                { field: 'name', displayName: 'Run name' },
                 { field: 'monsterPowerLevel', displayName: 'MP' },
                 { field: 'act', displayName: 'Act' },
                 { field: 'startExp', displayName: 'Start exp', cellFilter: "number:0" },
@@ -50,10 +50,8 @@ angular.module('Diablo3Farmer.Controllers', [])
 
             run.endExp = $scope.endExp;
             run.endTime = dateService.now();
-
             var elapsedSeconds = (run.endTime - run.startTime) / 1000;
             var totalExp = run.endExp - run.startExp;
-
             run.expPerHour = Math.round((totalExp / elapsedSeconds) * 3600);
 
             $scope.runs.push(run);
@@ -63,10 +61,7 @@ angular.module('Diablo3Farmer.Controllers', [])
             runStorageService.save($scope.runs);
         };
 
-        $scope.getRunGroups = function() {
-            return {
-                'foo': [{ foo: 'f123', bar: 'asd2' }, { foo: 'f123', bar: 'asd2' }],
-                'bar': [{ foo: 'f 23', bar: 'a d2' }, { fo: 'f123', bar: 'asd2' }]
-            };
+        $scope.getRunGroups = function () {
+            return  _.groupBy($scope.runs, "name");
         };
     }]);

@@ -1,7 +1,9 @@
 ﻿/// <reference path="Scripts/jasmine.js" />
 /// <reference path="Scripts/Lib/angular-1.2.0-rc.2/angular.js" />
 /// <reference path="Scripts/Lib/angular-1.2.0-rc.2/angular-mocks.js" />
+/// <reference path="../diablo3farmer.web/scripts/lib/underscore/underscore.js" />
 /// <reference path="Scripts/Controllers.js" />
+
 'use strict';
 //Prevents jasmine to notify ReSharper for end of test run. Can be used on debuggin purposes.
 //jasmine.getEnv().currentRunner_.finishCallback = function () {};
@@ -116,12 +118,13 @@ describe('FarmRunController', function() {
     });
 
     describe('when ending farming run', function() {
+        var runName = 'Test';
+
         function startRun(startExp) {
             scope.selectedAct = 1;
             scope.selectedMonsterPowerLevel = 'MP02';
-            scope.name = 'Test';
+            scope.name = runName;
             scope.startExp = startExp;
-            
             scope.startRun();
         }
 
@@ -175,16 +178,13 @@ describe('FarmRunController', function() {
         });
     });
 
-    describe('getRunGroups() should return runs grouped by name', function() {
-        it('should return runs grouped by name', function() {
-            scope.runs = [{ name: "a" }, { name: "a" }, { name: "b" }];
+    describe('getRunGroups', function() {
+        it('should return runs grouped by name', function () {
+            scope.runs = [{ name: "a" }, { name: "b" }, { name: "a" }];
             var groups = scope.getRunGroups();
             
-            expect(groups.size).toBe(2);
-        });
-
-        it('test grouping', function() {
-            
+            expect(groups["a"].length).toBe(2);
+            expect(groups["b"].length).toBe(1);
         });
     });
 });
