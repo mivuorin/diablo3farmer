@@ -34,26 +34,16 @@ angular.module('Diablo3Farmer.Controllers', [])
             ]
         };
 
-        $scope.startRun = function() {
-            var run = {
-                monsterPowerLevel: $scope.selectedMonsterPowerLevel,
-                act: $scope.selectedAct,
-                name: $scope.name,
-                startExp: $scope.startExp,
-                startTime: dateService.now()
-            };
-            $scope.endExp = $scope.startExp;
+        $scope.startRun = function () {
+            var run = new Run($scope.name, $scope.selectedMonsterPowerLevel, $scope.selectedAct);
+            run.start($scope.startExp, dateService.now());
             $scope.currentRun = run;
+            $scope.endExp = $scope.startExp;
         };
 
         $scope.endRun = function() {
             var run = $scope.currentRun;
-            run.endExp = $scope.endExp;
-            run.endTime = dateService.now();
-            
-            var elapsedSeconds = (run.endTime - run.startTime) / 1000;
-            var totalExp = run.endExp - run.startExp;
-            run.expPerHour = Math.round((totalExp / elapsedSeconds) * 3600);
+            run.end($scope.endExp, dateService.now());
 
             if (run.name in $scope.runs) {
                 $scope.runs[run.name].push(run);
@@ -61,10 +51,10 @@ angular.module('Diablo3Farmer.Controllers', [])
                 $scope.runs[run.name] = [run];
             }
 
-            $scope.currentRun = null;
-            $scope.startExp = run.endExp;
-
             runStorageService.save($scope.runs);
+            
+            $scope.currentRun = null;
+            $scope.startExp = $scope.endExp;
         };
 
         $scope.getRunNames = function () {

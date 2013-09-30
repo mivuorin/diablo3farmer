@@ -21,7 +21,9 @@ namespace Diablo3Farmer.Web
                 .Include(
                     "~/Scripts/App.js",
                     "~/Scripts/Controllers.js",
-                    "~/Scripts/Services.js");
+                    "~/Scripts/Run.js",
+                    "~/Scripts/Services.js"
+                );
 
             bundles.Add(jsLibs);
             bundles.Add(jsApp);

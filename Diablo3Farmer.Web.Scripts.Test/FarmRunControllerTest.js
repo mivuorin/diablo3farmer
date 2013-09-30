@@ -3,6 +3,7 @@
 /// <reference path="../diablo3farmer.web/scripts/lib/angular-1.2.0-rc.2/angular-mocks.js" />
 /// <reference path="../diablo3farmer.web/scripts/lib/underscore/underscore.js" />
 /// <reference path="../diablo3farmer.web/scripts/controllers.js" />
+/// <reference path="../Diablo3Farmer.Web/Scripts/Run.js" />
 
 'use strict';
 //Prevents jasmine to notify ReSharper for end of test run. Can be used on debuggin purposes.
@@ -14,10 +15,10 @@ describe('FarmRunController', function() {
     var controller;
     var dateServiceSpy = jasmine.createSpyObj('dateService', ['now']);
     var runStorageServiceSpy = jasmine.createSpyObj('runStorageService', ['load', 'save']);
-    
+
     beforeEach(function() {
         module('Diablo3Farmer.Controllers');
-        module(function ($provide) {
+        module(function($provide) {
             $provide.value('dateService', dateServiceSpy);
             $provide.value('runStoreService', runStorageServiceSpy);
         });
@@ -33,8 +34,9 @@ describe('FarmRunController', function() {
             });
         });
     });
-    
-    describe('when loading controller', function() {
+
+    describe('creating controller', function() {
+
         it('should return monster power levels', function() {
             expect(scope.monsterPowerLevels).toEqual(['MP01', 'MP02', 'MP03', 'MP04', 'MP05', 'MP06', 'MP07', 'MP08', 'MP09', 'MP10']);
         });
@@ -44,156 +46,100 @@ describe('FarmRunController', function() {
         });
 
         it('should set default act', function() {
-            expect(scope.selectedAct).toEqual( scope.acts[0] );
+            expect(scope.selectedAct).toEqual(scope.acts[0]);
         });
 
-        it('default description should be empty', function() {
+        it('set default run name to empty', function() {
             expect(scope.name).toBe('');
         });
 
-        it('should set run started to false', function () {
+        it('should set run started to false', function() {
             var runStarted = scope.runStarted();
             expect(runStarted).toBe(false);
         });
 
-        it('should get runs from run store', function () {
+        it('should get runs from run store', function() {
             expect(runStorageServiceSpy.load).toHaveBeenCalled();
             expect(scope.runs).toEqual({});
         });
-    });
 
-    describe('when starting new farm run', function () {
-        
-        it('should set correct mp level', function() {
-            var mp03 = 'MP03';
-            scope.selectedMonsterPowerLevel = mp03;
+        describe('starting new run', function() {
+            var runName = 'test';
+            var selectedMpLevel = 'MP03';
+            var selectedAct = { name: 'Act 2', value: 2, };
+            var startExp = 250;
+            var newRun;
+            var runObject;
+            var startTime = Date.now();
 
-            scope.startRun();
+            beforeEach(function() {
+                runObject = jasmine.createSpyObj('Run', ['start', 'end']);
+                newRun = spyOn(window, 'Run').andReturn(runObject);
+                dateServiceSpy.now.andReturn(startTime);
 
-            var run = scope.currentRun;
-            expect(run.monsterPowerLevel).toBe(mp03);
-        });
+                scope.selectedMonsterPowerLevel = selectedMpLevel;
+                scope.selectedAct = selectedAct;
+                scope.name = runName;
+                scope.startExp = startExp;
 
-        it('should set correct act', function() {
-            scope.selectedAct = 2;
+                scope.startRun();
+            });
 
-            scope.startRun();
+            it('should prefill endExp to startExp', function() {
+                expect(scope.endExp).toBe(startExp);
+            });
 
-            var run = scope.currentRun;
-            expect(run.act).toBe(2);
-        });
+            it('should create new run', function() {
+                expect(newRun).toHaveBeenCalledWith(runName, selectedMpLevel, selectedAct);
+            });
 
-        it('should set run name', function() {
-            scope.name = "test";
+            it('should start run with start time', function() {
+                expect(runObject.start).toHaveBeenCalledWith(startExp, startTime);
+            });
 
-            scope.startRun();
+            it('should start run', function() {
+                expect(scope.runStarted()).toBe(true);
+            });
 
-            var run = scope.currentRun;
-            expect(run.name).toBe("test");
-        });
+            describe('when ending farming run', function() {
+                var endTime = Date.now();
+                var endExp = 500;
+                
+                beforeEach(function() {
+                    dateServiceSpy.now.andReturn(endTime);
+                    scope.endExp = endExp;
+                    scope.endRun();
+                });
 
-        it('should set starting exp', function() {
-            scope.startExp = 3548;
+                it('should stop run', function() {
+                    expect(scope.runStarted()).toBe(false);
+                });
 
-            scope.startRun();
+                it('should end run with end exp and end time', function() {
+                    expect(runObject.end).toHaveBeenCalledWith(endExp, endTime);
+                });
 
-            var run = scope.currentRun;
-            expect(run.startExp).toBe(3548);
-        });
+                it('should set start exp to end experience', function() {
+                    expect(scope.startExp).toBe(endExp);
+                });
 
-        it('should set start time', function() {
-            var expected = Date.now();
+                it('should save runs to runStorage', function() {
+                    expect(runStorageServiceSpy.save).toHaveBeenCalledWith(scope.runs);
+                });
 
-            dateServiceSpy.now.andReturn(expected);
-            scope.startRun();
+                xit('should group runs by name', function() {
+                    startRun(500);
+                    scope.endRun();
 
-            var run = scope.currentRun;
-            expect(run.startTime).toEqual(expected);
-        });
+                    startRun(500);
+                    scope.endRun();
 
-        it('should start run', function() {
-            scope.startRun();
-            expect(scope.runStarted()).toBe(true);
-        });
-
-        it('should prefill endExp to startExp', function() {
-            scope.startExp = 213;
-            scope.startRun();
-            expect(scope.endExp).toBe(scope.startExp);
-        });
-    });
-
-    describe('when ending farming run', function() {
-        var runName = 'Test';
-
-        function startRun(startExp) {
-            scope.selectedAct = 1;
-            scope.selectedMonsterPowerLevel = 'MP02';
-            scope.name = runName;
-            scope.startExp = startExp;
-            scope.startRun();
-        }
-
-        it('should stop run', function () {
-            startRun(0);
-            scope.endRun();
-            expect(scope.runStarted()).toBe(false);
-        });
-
-        it('should set end exp', function () {
-            startRun(0);
-
-            scope.endExp = 750;
-            scope.endRun();
-            
-            var run = scope.runs[runName][0];
-            expect(run.endExp).toBe(750);
-        });
-
-        it('should calculate exp per hour', function () {
-            var startTime = new Date();
-            dateServiceSpy.now.andReturn(startTime);
-
-            startRun(0);
-            
-            var endTime = new Date();
-            endTime.setHours(startTime.getHours() + 1);
-            dateServiceSpy.now.andReturn(endTime);
-
-            scope.endExp = 750;
-            scope.endRun();
-            
-            var run = scope.runs[runName][0];
-            expect(run.expPerHour).toBe(750);
-        });
-        
-        it('should set start exp to finished experience', function() {
-            startRun(6750);
-            var endExp = 8557;
-            
-            scope.endExp = endExp;
-            scope.endRun();
-
-            expect(scope.startExp).toBe(endExp);
-        });
-
-        it('should save runs', function() {
-            startRun(500);
-            scope.endRun();
-            expect(runStorageServiceSpy.save).toHaveBeenCalledWith(scope.runs);
-        });
-
-        it('should group runs by name', function() {
-            startRun(500);
-            scope.endRun();
-
-            startRun(500);
-            scope.endRun();
-
-            expect(scope.runs[runName].length).toBe(2);
+                    expect(scope.runs[runName].length).toBe(2);
+                });
+            });
         });
     });
-
+    
     describe('getRunNames', function() {
         it('should return run names as array from runs', function() {
             scope.runs = {
