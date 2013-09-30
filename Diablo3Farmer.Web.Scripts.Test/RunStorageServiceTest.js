@@ -1,7 +1,8 @@
 ﻿/// <reference path="Scripts/jasmine.js" />
-/// <reference path="Scripts/Lib/angular-1.2.0-rc.2/angular.js" />
-/// <reference path="Scripts/Lib/angular-1.2.0-rc.2/angular-mocks.js" />
-/// <reference path="Scripts/Services.js" />
+/// <reference path="../Diablo3Farmer.Web/Scripts/Lib/angular-1.2.0-rc.2/angular.js" />
+/// <reference path="../Diablo3Farmer.Web/Scripts/Lib/angular-1.2.0-rc.2/angular-mocks.js" />
+/// <reference path="../diablo3farmer.web/scripts/services.js" />
+
 'use strict';
 
 describe('runStorageService', function() {
