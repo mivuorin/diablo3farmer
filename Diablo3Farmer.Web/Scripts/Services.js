@@ -6,7 +6,7 @@ angular.module('Diablo3Farmer.Services', [])
             load: function() {
                 var item = $window.localStorage.getItem('Diablo3Farmer.runs');
                 if (item === null) {
-                    return {};
+                    return [];
                 }
                 return JSON.parse(item);
             },

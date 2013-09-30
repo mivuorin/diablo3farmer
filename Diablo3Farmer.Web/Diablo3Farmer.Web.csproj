@@ -136,6 +136,7 @@
     <Content Include="Content\ng-grid.css" />
     <Content Include="Content\ng-grid.min.css" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\Filters.js" />
     <Content Include="Scripts\Lib\angular-1.2.0-rc.2\angular-mocks.js" />
     <Content Include="Scripts\Lib\angular-1.2.0-rc.2\angular.js" />
     <Content Include="Scripts\Lib\angular-1.2.0-rc.2\angular.min.js" />

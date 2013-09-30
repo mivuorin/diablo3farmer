@@ -35,8 +35,9 @@
   <ItemGroup>
     <Content Include="css\jasmine.css" />
     <Content Include="FarmRunControllerTest.js" />
+    <Content Include="GroupByNameFilterTest.js" />
     <Content Include="RunStorageServiceTest.js" />
-    <Content Include="RuntTest.js" />
+    <Content Include="RunTest.js" />
     <Content Include="Scripts\jasmine-html.js" />
     <Content Include="Scripts\jasmine.js" />
   </ItemGroup>

@@ -15,6 +15,7 @@ describe('FarmRunController', function() {
     var controller;
     var dateServiceSpy = jasmine.createSpyObj('dateService', ['now']);
     var runStorageServiceSpy = jasmine.createSpyObj('runStorageService', ['load', 'save']);
+    var runs = [];
 
     beforeEach(function() {
         module('Diablo3Farmer.Controllers');
@@ -23,10 +24,10 @@ describe('FarmRunController', function() {
             $provide.value('runStoreService', runStorageServiceSpy);
         });
 
-        runStorageServiceSpy.load.andReturn({});
+        runStorageServiceSpy.load.andReturn(runs);
 
         inject(function($rootScope, $controller) {
-            scope = $rootScope.$new();
+            scope = {}; // $rootScope.$new() ?? what does this line do? it relates to preserving scope between tests or something else.
             controller = $controller('FarmRunController', {
                 $scope: scope,
                 dateService: dateServiceSpy,
@@ -60,7 +61,7 @@ describe('FarmRunController', function() {
 
         it('should get runs from run store', function() {
             expect(runStorageServiceSpy.load).toHaveBeenCalled();
-            expect(scope.runs).toEqual({});
+            expect(scope.runs).toEqual(runs);
         });
 
         describe('starting new run', function() {
@@ -127,20 +128,15 @@ describe('FarmRunController', function() {
                     expect(runStorageServiceSpy.save).toHaveBeenCalledWith(scope.runs);
                 });
 
-                xit('should group runs by name', function() {
-                    startRun(500);
-                    scope.endRun();
-
-                    startRun(500);
-                    scope.endRun();
-
-                    expect(scope.runs[runName].length).toBe(2);
+                xit('should add run to runs array', function() {
+                    // todo figure out why controller scope is not reset
+                    expect(scope.runs.length).toBe(1);
                 });
             });
         });
     });
     
-    describe('getRunNames', function() {
+    xdescribe('getRunNames', function() {
         it('should return run names as array from runs', function() {
             scope.runs = {
                 'a': [{ name: 'a' }, { name: 'a' }],

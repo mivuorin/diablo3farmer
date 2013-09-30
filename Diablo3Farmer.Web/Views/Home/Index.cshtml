@@ -57,8 +57,8 @@
                             <th>End Exp</th>
                             <th>Exp / hour</th>
                         </tr>
-                        <tbody ng-repeat="(groupName, group) in runs track by $index">
-                            <tr ng-repeat="run in group track by $index">
+                        <tbody ng-repeat="(groupName, group) in runs | groupByName">
+                            <tr ng-repeat="run in group">
                                 <td rowspan="{{group.length}}" ng-if="$first">{{groupName}}</td>
                                 <td>{{run.monsterPowerLevel}}</td>
                                 <td>{{run.act.value}}</td>

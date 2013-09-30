@@ -14,7 +14,7 @@ angular.module('Diablo3Farmer.Controllers', [])
         ];
         $scope.selectedAct = $scope.acts[0];
 
-        $scope.runs =  runStorageService.load();
+        $scope.runs = runStorageService.load();
         $scope.name = '';
         $scope.currentRun = null;
         
@@ -45,12 +45,7 @@ angular.module('Diablo3Farmer.Controllers', [])
             var run = $scope.currentRun;
             run.end($scope.endExp, dateService.now());
 
-            if (run.name in $scope.runs) {
-                $scope.runs[run.name].push(run);
-            } else {
-                $scope.runs[run.name] = [run];
-            }
-
+            $scope.runs.push(run);
             runStorageService.save($scope.runs);
             
             $scope.currentRun = null;
@@ -59,5 +54,12 @@ angular.module('Diablo3Farmer.Controllers', [])
 
         $scope.getRunNames = function () {
             return _.keys($scope.runs);
+        };
+
+        $scope.getRunGroups = function () {
+            return _.memoize(_.groupBy($scope.runs, "name"));
+
+            //var groupList = 
+            //return _.toArray(groupList);
         };
     }]);
