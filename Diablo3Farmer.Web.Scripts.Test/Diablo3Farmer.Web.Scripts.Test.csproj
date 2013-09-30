@@ -42,6 +42,12 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Diablo3Farmer.Web\Diablo3Farmer.Web.csproj">
+      <Project>{3679f366-297c-491b-8643-aea97e0aa050}</Project>
+      <Name>Diablo3Farmer.Web</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

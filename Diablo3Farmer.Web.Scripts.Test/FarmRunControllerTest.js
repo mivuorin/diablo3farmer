@@ -14,7 +14,7 @@ describe('FarmRunController', function() {
     var controller;
     var dateServiceSpy = jasmine.createSpyObj('dateService', ['now']);
     var runStorageServiceSpy = jasmine.createSpyObj('runStorageService', ['load', 'save']);
-
+    
     beforeEach(function() {
         module('Diablo3Farmer.Controllers');
         module(function ($provide) {
