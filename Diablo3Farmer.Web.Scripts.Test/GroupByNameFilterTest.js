@@ -11,8 +11,8 @@ describe('groupByName filter', function() {
     var groupByName;
     beforeEach(function() {
         module('Diablo3Farmer.Filters');
-        inject(function(_groupByName_) {
-            groupByName = _groupByName_;
+        inject(function($filter) {
+            groupByName = $filter('groupByName');
         });
     });
 
@@ -24,7 +24,7 @@ describe('groupByName filter', function() {
             { name: 'c' }
         ];
 
-        var groups = groupByName()(items);
+        var groups = groupByName(items);
 
         var expected = {
             'a': [{ name: 'a' }],
