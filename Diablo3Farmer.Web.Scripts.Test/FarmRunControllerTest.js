@@ -128,23 +128,29 @@ describe('FarmRunController', function() {
                     expect(runStorageServiceSpy.save).toHaveBeenCalledWith(scope.runs);
                 });
 
-                xit('should add run to runs array', function() {
-                    // todo figure out why controller scope is not reset
+                it('should add run to runs array', function() {
                     expect(scope.runs.length).toBe(1);
                 });
             });
         });
     });
     
-    xdescribe('getRunNames', function() {
-        it('should return run names as array from runs', function() {
-            scope.runs = {
-                'a': [{ name: 'a' }, { name: 'a' }],
-                'b': [{ name: 'b' }, { name: 'b' }],
-            };
-            var runNames = scope.getRunNames();
+    describe('getRunNames', function () {
 
-            expect(runNames).toEqual(['a', 'b']);
+        var runNames;
+        beforeEach(function() {
+            scope.runs = [
+                new Run('a'),
+                new Run('b'),
+                new Run('b'),
+                new Run('c')
+            ];
+            
+            runNames = scope.getRunNames();
+        });
+
+        it('should return grouped names for name typeahed', function() {
+            expect(runNames).toEqual(['a', 'b', 'c']);
         });
     });
 });
