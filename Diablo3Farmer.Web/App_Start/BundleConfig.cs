@@ -14,7 +14,8 @@ namespace Diablo3Farmer.Web
                     "~/Scripts/Lib/ui-bootstrap-0.6.0/ui-bootstrap-{version}.js",
                     "~/Scripts/Lib/ui-bootstrap-0.6.0/ui-bootstrap-tpls-{version}.js",
                     "~/Scripts/Lib/underscore/underscore.js",
-                    "~/Scripts/Lib/ng-grid-{version}.js"
+                    "~/Scripts/Lib/ng-grid-{version}.js",
+                    "~/Scripts/Lib/moment-2.2.1/moment.js"
                 );
 
             var jsApp = new Bundle("~/js", new JsMinify())

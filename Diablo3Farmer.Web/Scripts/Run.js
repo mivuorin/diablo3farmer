@@ -15,12 +15,12 @@ function Run(name, monsterPowerLevel, act) {
     this.end = function (endExp, endTime) {
         self.endExp = endExp;
         self.endTime = endTime;
-
+        self.time = moment(self.endTime).diff(self.startTime);
         calculateExpPerHour();
     };
 
     function calculateExpPerHour() {
-        var elapsedSeconds = (self.endTime - self.startTime) / 1000;
+        var elapsedSeconds = moment.duration(self.time).asSeconds();
         var totalExp = self.endExp - self.startExp;
         self.expPerHour = Math.round((totalExp / elapsedSeconds) * 3600);
     }

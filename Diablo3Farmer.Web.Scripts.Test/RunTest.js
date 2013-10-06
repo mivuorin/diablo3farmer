@@ -1,5 +1,6 @@
 ﻿/// <reference path="scripts/jasmine.js" />
 /// <reference path="../diablo3farmer.web/scripts/run.js" />
+/// <reference path="../diablo3farmer.web/scripts/Lib/moment-2.2.1/moment.js" />
 
 describe('Run test', function() {
     var run;
@@ -36,7 +37,7 @@ describe('Run test', function() {
             var startExp = 500;
             var startTime = new Date();
 
-            beforeEach(function() {
+            beforeEach(function () {
                 run.start(startExp, startTime);
             });
 
@@ -50,11 +51,10 @@ describe('Run test', function() {
 
             describe('when ending run', function() {
                 var endExp = 750;
-
+                var endTime;
+                
                 beforeEach(function() {
-                    var endTime = new Date();
-                    endTime.setHours(startTime.getHours() + 1);
-
+                    endTime = moment(startTime).clone().add('hours', 1).toDate();
                     run.end(endExp, endTime);
                 });
 
@@ -66,6 +66,10 @@ describe('Run test', function() {
                     expect(run.expPerHour).toBe(250);
                 });
 
+                it('should calculate run time', function () {
+                    var hourInMs = moment.duration(1, 'hours').asMilliseconds();
+                    expect(run.time).toBe(hourInMs);
+                });
             });
         });
     });

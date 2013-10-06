@@ -158,6 +158,10 @@
     <Content Include="Scripts\Lib\ui-bootstrap-0.6.0\ui-bootstrap-0.6.0.min.js" />
     <Content Include="Scripts\Lib\ui-bootstrap-0.6.0\ui-bootstrap-tpls-0.6.0.js" />
     <Content Include="Scripts\Lib\ui-bootstrap-0.6.0\ui-bootstrap-tpls-0.6.0.min.js" />
+    <Content Include="Scripts\Lib\moment-2.2.1\moment+langs.js" />
+    <Content Include="Scripts\Lib\moment-2.2.1\moment+langs.min.js" />
+    <Content Include="Scripts\Lib\moment-2.2.1\moment.js" />
+    <Content Include="Scripts\Lib\moment-2.2.1\moment.min.js" />
     <Content Include="Scripts\Run.js" />
     <Content Include="Scripts\Services.js" />
     <Content Include="Scripts\Lib\underscore\underscore.js" />
