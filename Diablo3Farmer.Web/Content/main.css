@@ -1,9 +1,9 @@
 ﻿body {
-    padding-top: 20px;
+    padding-top: 10px;
     padding-bottom: 30px;
 }
 
-/*style.css*/
+/* Ng-Grid */
 .gridStyle {
     border: 1px solid rgb(212,212,212);
     height: 500px;
@@ -12,10 +12,17 @@
 /* Angular ui bootstrap fix */
 .nav, .pagination, .carousel a { cursor: pointer; }
 
-.form-inline .control-label {
-    color: red;
+.section {
+    margin-top: 1em;
+    margin-bottom: 1em;
 }
 
-/*.form-inline .form-group {
-    display: inline;
-}*/
+.controls {
+    padding-left: 1em;
+    padding-bottom: 1em;
+    border-bottom: 1px solid #ddd;
+}
+
+.form-inline > button {
+    vertical-align: bottom;
+}

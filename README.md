@@ -20,3 +20,4 @@ TODO:
  * Add sorting to ng-repeater table
  * After starting run focus should be in endExperience field
  * Add validation to start experience field which needs to be number
+ * Show total run time
