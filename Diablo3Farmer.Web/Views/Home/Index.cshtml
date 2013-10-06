@@ -20,7 +20,7 @@
                         <form ng-show="!runStarted()" class="form-inline">
                             <div class="form-group input-group-sm">
                                 <label for="name" class="control-label">Name:</label>
-                                <input id="name" type="text" ng-model="name" class="form-control" typeahead="name for name in getRunNames() | filter:$viewValue" />
+                                <input id="name" type="text" ng-model="name" class="form-control" typeahead="name for name in getRunNames() | filter:$viewValue" d3-auto-select />
                             </div>
                             <div class="form-group input-group-sm">
                                 <label for="mpSelection" class="control-label">MP:</label>
@@ -32,14 +32,14 @@
                             </div>
                             <div class="form-group input-group-sm">
                                 <label for="startingExp" class="control-label">Start Exp:</label>
-                                <input id="startingExp" type="text" ng-model="startExp" class="form-control"/>
+                                <input id="startingExp" type="text" ng-model="startExp" class="form-control" d3-auto-select />
                             </div>
                             <button ng-click="startRun()" class="btn btn-default btn-sm">Start</button>
                         </form>
                         <form ng-show="runStarted()" class="form-inline">
                             <div class="form-group input-group-sm">
                                 <label for="endExp">End exp:</label>
-                                <input id="endExp" type="text" ng-model="endExp" class="form-control" />
+                                <input id="endExp" type="text" ng-model="endExp" class="form-control" d3-auto-select />
                             </div>
                             <button ng-click="endRun()" class="btn btn-default btn-sm">End</button>
                         </form>
