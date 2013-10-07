@@ -12,16 +12,17 @@ function Run(name, monsterPowerLevel, act) {
         self.startTime = startTime;
     };
 
-    this.end = function (endExp, endTime) {
+    this.end = function (endExp, endTime, essences, tears) {
         self.endExp = endExp;
         self.endTime = endTime;
         self.time = moment(self.endTime).diff(self.startTime);
-        calculateExpPerHour();
+        self.expPerHour = calculatePerHour(self.endExp - self.startExp);
+        self.essencesPerHour = calculatePerHour(essences);
+        self.tearsPerHour = calculatePerHour(tears);
     };
 
-    function calculateExpPerHour() {
+    function calculatePerHour(total) {
         var elapsedSeconds = moment.duration(self.time).asSeconds();
-        var totalExp = self.endExp - self.startExp;
-        self.expPerHour = Math.round((totalExp / elapsedSeconds) * 3600);
+        return Math.round((total / elapsedSeconds) * 3600);
     }
 };

@@ -52,10 +52,12 @@ describe('Run test', function() {
             describe('when ending run', function() {
                 var endExp = 750;
                 var endTime;
+                var essences = 205;
+                var tears = 123;
                 
                 beforeEach(function() {
                     endTime = moment(startTime).clone().add('hours', 1).toDate();
-                    run.end(endExp, endTime);
+                    run.end(endExp, endTime, essences, tears);
                 });
 
                 it('should set end exp', function() {
@@ -69,6 +71,14 @@ describe('Run test', function() {
                 it('should calculate run time', function () {
                     var hourInMs = moment.duration(1, 'hours').asMilliseconds();
                     expect(run.time).toBe(hourInMs);
+                });
+
+                it('should calculate essences per hour', function() {
+                    expect(run.essencesPerHour).toBe(essences);
+                });
+
+                it('should calculate tears per hour', function() {
+                    expect(run.tearsPerHour).toBe(tears);
                 });
             });
         });

@@ -20,7 +20,8 @@
                         <form ng-show="!runStarted()" class="form-inline">
                             <div class="form-group input-group-sm">
                                 <label for="name" class="control-label">Name:</label>
-                                <input id="name" type="text" ng-model="name" class="form-control" typeahead="name for name in getRunNames() | filter:$viewValue" d3-auto-select />
+                                <input id="name" type="text" ng-model="name" typeahead="name for name in getRunNames() | filter:$viewValue" d3-auto-select
+                                     class="form-control col-md-3"  />
                             </div>
                             <div class="form-group input-group-sm">
                                 <label for="mpSelection" class="control-label">MP:</label>
@@ -41,6 +42,14 @@
                                 <label for="endExp">End exp:</label>
                                 <input id="endExp" type="text" ng-model="endExp" class="form-control" d3-auto-select />
                             </div>
+                            <div class="form-group input-group-sm">
+                                <label for="essences" class="control-label">Essences:</label>
+                                <input id="essences" type="text" ng-model="essences" class="form-control" d3-auto-select />
+                            </div>
+                            <div class="form-group input-group-sm">
+                                <label for="tears" class="control-label">Tears:</label>
+                                <input id="tears" type="text" ng-model="tears" class="form-control" d3-auto-select />
+                            </div>
                             <button ng-click="endRun()" class="btn btn-default btn-sm">End</button>
                         </form>
                     </div>
@@ -53,10 +62,10 @@
                             <th>Run name</th>
                             <th>MP</th>
                             <th>Act</th>
-                            <th>Start Exp</th>
-                            <th>End Exp</th>
-                            <th>Exp / hour</th>
                             <th>Time</th>
+                            <th>Exp / hour</th>
+                            <th><img alt="Equisite essence" src="~/Content/essence.png" class="icon" title="Equisite essence" /> / hour</th>
+                            <th><img alt="Iridescent tear" src="~/Content/tear.png" class="icon" title="Iridescent tear" /> / hour</th>
                             <th></th>
                         </tr>
                         <tbody ng-repeat="(groupName, group) in runs | groupByName">
@@ -64,10 +73,10 @@
                                 <td rowspan="{{group.length}}" ng-if="$first">{{groupName}}</td>
                                 <td>{{run.monsterPowerLevel}}</td>
                                 <td>{{run.act.value}}</td>
-                                <td>{{run.startExp | number:0 }}</td>
-                                <td>{{run.endExp | number:0 }}</td>
-                                <td>{{run.expPerHour | number:0 }}</td>
                                 <td>{{run.time | timeSpan }}</td>
+                                <td>{{run.expPerHour | number:0 }}</td>
+                                <td>{{run.essencesPerHour | number:0 }}</td>
+                                <td>{{run.tearsPerHour | number:0 }}</td>
                                 <td>
                                     <span class="remove glyphicon glyphicon-remove-circle" ng-click="removeRun(run)"></span>
                                 </td>

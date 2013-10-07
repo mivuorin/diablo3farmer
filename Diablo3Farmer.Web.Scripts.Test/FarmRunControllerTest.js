@@ -101,13 +101,25 @@ describe('FarmRunController', function() {
                 expect(scope.runStarted()).toBe(true);
             });
 
+            it('should set collected essences to 0', function() {
+                expect(scope.essences).toBe(0);
+            });
+
+            it('should set collected tears to 0', function() {
+                expect(scope.tears).toBe(0);
+            });
+
             describe('when ending farming run', function() {
                 var endTime = Date.now();
                 var endExp = 500;
+                var essences = 105;
+                var tears = 354;
                 
                 beforeEach(function() {
                     dateServiceSpy.now.andReturn(endTime);
                     scope.endExp = endExp;
+                    scope.essences = essences;
+                    scope.tears = tears;
                     scope.endRun();
                 });
 
@@ -115,8 +127,8 @@ describe('FarmRunController', function() {
                     expect(scope.runStarted()).toBe(false);
                 });
 
-                it('should end run with end exp and end time', function() {
-                    expect(runObject.end).toHaveBeenCalledWith(endExp, endTime);
+                it('should end run with end exp, end time, collected essences and tears', function() {
+                    expect(runObject.end).toHaveBeenCalledWith(endExp, endTime, essences, tears);
                 });
 
                 it('should set start exp to end experience', function() {

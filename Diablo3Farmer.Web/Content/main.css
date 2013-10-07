@@ -34,3 +34,9 @@
 .remove:hover {
     color: rgb(191, 37, 37);
 }
+
+.icon {
+    vertical-align: top;
+    width: 24px;
+    height: 24px;
+}

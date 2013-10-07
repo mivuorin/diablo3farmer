@@ -132,9 +132,11 @@
     <Content Include="Content\bootstrap\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap\bootstrap.css" />
     <Content Include="Content\bootstrap\bootstrap.min.css" />
+    <Content Include="Content\essence.png" />
     <Content Include="Content\main.css" />
     <Content Include="Content\ng-grid.css" />
     <Content Include="Content\ng-grid.min.css" />
+    <Content Include="Content\tear.png" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\Directives.js" />
     <Content Include="Scripts\Filters.js" />
@@ -167,7 +169,9 @@
     <Content Include="Scripts\Services.js" />
     <Content Include="Scripts\Lib\underscore\underscore.js" />
     <Content Include="Scripts\Lib\underscore\underscore.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

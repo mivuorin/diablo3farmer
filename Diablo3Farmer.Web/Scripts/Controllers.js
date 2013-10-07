@@ -39,11 +39,13 @@ angular.module('Diablo3Farmer.Controllers', [])
             run.start($scope.startExp, dateService.now());
             $scope.currentRun = run;
             $scope.endExp = $scope.startExp;
+            $scope.essences = 0;
+            $scope.tears = 0;
         };
 
         $scope.endRun = function() {
             var run = $scope.currentRun;
-            run.end($scope.endExp, dateService.now());
+            run.end($scope.endExp, dateService.now(), $scope.essences, $scope.tears);
 
             $scope.runs.push(run);
             
