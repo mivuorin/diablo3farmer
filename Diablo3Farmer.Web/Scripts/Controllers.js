@@ -59,4 +59,9 @@ angular.module('Diablo3Farmer.Controllers', [])
             });
             return _.keys(groups);
         };
+
+        $scope.removeRun = function(run) {
+            $scope.runs.splice($scope.runs.indexOf(run), 1);
+            runStorageService.save($scope.runs);
+        };
     }]);

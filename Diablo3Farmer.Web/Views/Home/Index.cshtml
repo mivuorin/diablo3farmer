@@ -57,6 +57,7 @@
                             <th>End Exp</th>
                             <th>Exp / hour</th>
                             <th>Time</th>
+                            <th></th>
                         </tr>
                         <tbody ng-repeat="(groupName, group) in runs | groupByName">
                             <tr ng-repeat="run in group track by $index">
@@ -67,6 +68,9 @@
                                 <td>{{run.endExp | number:0 }}</td>
                                 <td>{{run.expPerHour | number:0 }}</td>
                                 <td>{{run.time | timeSpan }}</td>
+                                <td>
+                                    <span class="remove glyphicon glyphicon-remove-circle" ng-click="removeRun(run)"></span>
+                                </td>
                             </tr>
                         </tbody>
                     </table>

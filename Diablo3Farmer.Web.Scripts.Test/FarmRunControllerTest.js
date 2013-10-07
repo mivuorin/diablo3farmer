@@ -132,10 +132,30 @@ describe('FarmRunController', function() {
                 });
             });
         });
+
+        describe('removing run', function() {
+            beforeEach(function() {
+                scope.runs = [
+                    new Run('first'),
+                    new Run('second')
+                ];
+
+                scope.removeRun(scope.runs[0]);
+            });
+
+            it('should remove given run from runs', function() {
+                expect(scope.runs.length).toBe(1);
+                expect(scope.runs[0].name).toBe('second');
+            });
+
+            it('should save runs to runStoreService', function() {
+                expect(runStorageServiceSpy.save).toHaveBeenCalledWith(scope.runs);
+            });
+
+        });
     });
     
     describe('getRunNames', function () {
-
         var runNames;
         beforeEach(function() {
             scope.runs = [

@@ -26,3 +26,11 @@
 .form-inline > button {
     vertical-align: bottom;
 }
+
+.remove {
+    font-size: large;
+}
+
+.remove:hover {
+    color: rgb(191, 37, 37);
+}

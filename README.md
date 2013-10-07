@@ -10,7 +10,6 @@ Side goal of project is to learn AngularJS and develop small app in it.
 TODO:
  * Create styles and better UI layout
  * Add angular end to end test
- * Delete run feature
  * Gold / hour feature
  * Loot: blues, rares, legendaries feature
  * Add warning if browser does not support local storage or other fearures required by app
@@ -19,3 +18,4 @@ TODO:
  * Add sorting to ng-repeater table
  * After starting run focus should be in endExperience field
  * Add validation to start experience field which needs to be number
+ * Fix layout in IE
