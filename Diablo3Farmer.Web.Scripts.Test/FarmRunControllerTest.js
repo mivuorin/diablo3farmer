@@ -15,8 +15,7 @@ describe('FarmRunController', function() {
     var controller;
     var dateServiceSpy = jasmine.createSpyObj('dateService', ['now']);
     var runStorageServiceSpy = jasmine.createSpyObj('runStorageService', ['load', 'save']);
-    var runs = [];
-
+    
     beforeEach(function() {
         module('Diablo3Farmer.Controllers');
         module(function($provide) {
@@ -24,10 +23,10 @@ describe('FarmRunController', function() {
             $provide.value('runStoreService', runStorageServiceSpy);
         });
 
-        runStorageServiceSpy.load.andReturn(runs);
+        runStorageServiceSpy.load.andReturn([]);
 
         inject(function($rootScope, $controller) {
-            scope = {}; // $rootScope.$new() ?? what does this line do? it relates to preserving scope between tests or something else.
+            scope = $rootScope.$new();
             controller = $controller('FarmRunController', {
                 $scope: scope,
                 dateService: dateServiceSpy,
@@ -61,7 +60,7 @@ describe('FarmRunController', function() {
 
         it('should get runs from run store', function() {
             expect(runStorageServiceSpy.load).toHaveBeenCalled();
-            expect(scope.runs).toEqual(runs);
+            expect(scope.runs).toEqual([]);
         });
 
         describe('starting new run', function() {
