@@ -17,30 +17,32 @@
             <div class="row section">
                 <div class="col-md-12">
                     <div class="controls">
-                        <form ng-show="!runStarted()" class="form-inline">
-                            <div class="form-group input-group-sm">
+                        
+                        <form name="startForm" ng-show="!runStarted()" novalidate ng-submit="startRun()" class="form-inline" >
+                            <div class="form-group input-group-sm" ng-class="{'has-error': startForm.name.$invalid && startForm.name.$dirty}">
                                 <label for="name" class="control-label">Name:</label>
-                                <input id="name" type="text" ng-model="name" typeahead="name for name in getRunNames() | filter:$viewValue" d3-auto-select
-                                     class="form-control col-md-3"  />
+                                <input id="name" name="name" type="text" ng-model="name" typeahead="name for name in getRunNames() | filter:$viewValue" d3-auto-select
+                                    required class="form-control col-md-3"  />
                             </div>
                             <div class="form-group input-group-sm">
-                                <label for="mpSelection" class="control-label">MP:</label>
-                                <select id="mpSelection" class="form-control" ng-model="selectedMonsterPowerLevel" ng-options="mp for mp in monsterPowerLevels"></select>
+                                <label for="selectedMonsterPowerLevel" class="control-label">MP:</label>
+                                <select id="selectedMonsterPowerLevel" class="form-control" ng-model="selectedMonsterPowerLevel" ng-options="mp for mp in monsterPowerLevels"></select>
                             </div>
                             <div class="form-group input-group-sm">
-                                <label for="actSelection" class="control-label">Act:</label>
-                                <select id="actSelection" class="form-control" ng-model="selectedAct" ng-options="act as act.name for act in acts"></select>
+                                <label for="selectedAct" class="control-label">Act:</label>
+                                <select id="selectedAct" class="form-control" ng-model="selectedAct" ng-options="act as act.name for act in acts"></select>
                             </div>
-                            <div class="form-group input-group-sm">
-                                <label for="startingExp" class="control-label">Start Exp:</label>
-                                <input id="startingExp" type="text" ng-model="startExp" class="form-control" d3-auto-select />
+                            <div class="form-group input-group-sm" ng-class="{'has-error': startForm.startExp.$invalid && startForm.startExp.$dirty}" >
+                                <label for="startExp" class="control-label">Start Exp:</label>
+                                <input id="startExp" name="startExp" type="number" ng-model="startExp" class="form-control" d3-auto-select required min="0" />
                             </div>
-                            <button ng-click="startRun()" class="btn btn-default btn-sm">Start</button>
+                            <button type="submit" class="btn btn-default btn-sm" ng-disabled="startForm.$invalid">Start</button>
                         </form>
-                        <form ng-show="runStarted()" class="form-inline">
-                            <div class="form-group input-group-sm">
+
+                        <form name="endForm" ng-show="runStarted()" class="form-inline" novalidate>
+                            <div class="form-group input-group-sm" ng-class="{'has-error': endForm.endExp.$invalid && endForm.endExp.$dirty}">
                                 <label for="endExp">End exp:</label>
-                                <input id="endExp" type="text" ng-model="endExp" class="form-control" d3-auto-select />
+                                <input id="endExp" name="endExp" type="number" ng-model="endExp" class="form-control" d3-auto-select required min="0" />
                             </div>
                             <div class="form-group input-group-sm">
                                 <label for="essences" class="control-label">Essences:</label>
@@ -50,8 +52,9 @@
                                 <label for="tears" class="control-label">Tears:</label>
                                 <input id="tears" type="text" ng-model="tears" class="form-control" d3-auto-select />
                             </div>
-                            <button ng-click="endRun()" class="btn btn-default btn-sm">End</button>
+                            <button ng-click="endRun()" class="btn btn-default btn-sm" ng-disabled="endForm.$invalid">End</button>
                         </form>
+
                     </div>
                 </div>
             </div>
