@@ -1,4 +1,5 @@
-﻿/// <reference path="scripts/jasmine.js" />
+﻿/// <reference path="../diablo3farmer.web/scripts/lib/underscore/underscore.js" />
+/// <reference path="scripts/jasmine.js" />
 
 'use strict';
 
@@ -9,7 +10,6 @@ describe('paragon level exp requirements', function () {
     beforeEach(function() {
         levels = [];
         levels.push({ requiredExp: 7200000 });
-        
         for (var level = 1; level < 100; level++) {
             
             var rate = 1440000;
@@ -24,8 +24,8 @@ describe('paragon level exp requirements', function () {
             }
 
             var prev = levels[level - 1].requiredExp;
-            var maxExpForLevel = prev + rate;
-            levels.push({ requiredExp: maxExpForLevel });
+            var requiredExp = prev + rate;
+            levels.push({ requiredExp: requiredExp });
         }
     });
 
@@ -77,6 +77,37 @@ describe('paragon level exp requirements', function () {
         
         it('Level 100 max exp should be 322,560,000', function() {
              expect(levels[99].requiredExp).toBe(322560000);
+        });
+    });
+
+    describe('Calculate correct total experience when character has leveled in middle of run', function() {
+        var endExp = 1450;
+        var startLevel;
+        var endLevel;
+
+        beforeEach(function () {
+            startLevel = levels[33];
+            endLevel = levels[36];
+        });
+
+        it('earned end experience should be', function() {
+            var expected;
+            expected = 54720000; // to end of level 34
+            expected += 56160000; // to end of level 35
+            expected += 57600000; // to end fo level 36
+            expected += 1450; // start of level 37
+
+            var levelCount = _.indexOf(levels, endLevel) - _.indexOf(levels, startLevel);
+            var expFromLevels = _.chain(levels)
+                .rest( _.indexOf(levels, startLevel) )
+                .first(levelCount)
+                .reduce(function(sum, level) {
+                    return sum + level.requiredExp;
+                }, 0)
+                .value();
+
+            var totalEndExp = expFromLevels + endExp;
+            expect(totalEndExp).toBe(expected);
         });
     });
 });
