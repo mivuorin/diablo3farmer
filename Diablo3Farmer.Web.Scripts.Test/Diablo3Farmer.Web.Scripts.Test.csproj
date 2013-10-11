@@ -36,6 +36,7 @@
     <Content Include="css\jasmine.css" />
     <Content Include="FarmRunControllerTest.js" />
     <Content Include="GroupByNameFilterTest.js" />
+    <Content Include="Paragon.js" />
     <Content Include="RunStorageServiceTest.js" />
     <Content Include="RunTest.js" />
     <Content Include="Scripts\jasmine-html.js" />
