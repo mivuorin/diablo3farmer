@@ -13,7 +13,7 @@ describe('paragon level exp requirements', function () {
         for (var level = 1; level < 100; level++) {
             
             var rate = 1440000;
-            if (level > 59 && level <= 69) {
+            if (level >= 60 && level <= 69) {
                 rate = 2 * 1440000;
             } else if (level >= 70 && level <= 79) {
                 rate = 3.5 * 1440000;
@@ -29,12 +29,11 @@ describe('paragon level exp requirements', function () {
         }
     });
 
-    it('Max exp for 1 level is 7,200,000', function() {
-        var firstLevel = levels[0];
-        expect(firstLevel.requiredExp).toBe(7200000);
-    });
-
-    describe('For Levels 1-60, experience requirements increase at a rate of 1,440,000/level', function() {
+    describe('For Levels 1-60, experience requirements increase at a rate of 1,440,000/level', function () {
+        it('Max exp for 1 level is 7,200,000', function() {
+            expect(levels[0].requiredExp).toBe(7200000);
+        });
+        
         it('Level 60 max exp should be 92,160,000', function() {
             expect(levels[59].requiredExp).toBe(92160000);
         });
@@ -80,23 +79,23 @@ describe('paragon level exp requirements', function () {
         });
     });
 
-    describe('Calculate correct total experience when character has leveled in middle of run', function() {
+    describe('Calculate correct end experience when player started run in level 34 and ended run in level 37 with 1450 exp', function() {
         var endExp = 1450;
         var startLevel;
         var endLevel;
-
+        var expected;
+        
         beforeEach(function () {
-            startLevel = levels[33];
-            endLevel = levels[36];
-        });
-
-        it('earned end experience should be', function() {
-            var expected;
             expected = 54720000; // to end of level 34
             expected += 56160000; // to end of level 35
             expected += 57600000; // to end fo level 36
             expected += 1450; // start of level 37
 
+            startLevel = levels[33];
+            endLevel = levels[36];
+        });
+
+        it('earned end experience should be', function() {
             var levelCount = _.indexOf(levels, endLevel) - _.indexOf(levels, startLevel);
             var expFromLevels = _.chain(levels)
                 .rest( _.indexOf(levels, startLevel) )
