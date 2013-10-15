@@ -33,12 +33,25 @@ describe('Run test', function() {
             expect(run.expPerHour).toBe(0);
         });
 
+        it('should be not started', function() {
+            expect(run.isRunning).toBe(false);
+        });
+
+        it('startExp should be 0', function() {
+            expect(run.startExp).toBe(0);
+        });
+
+        it('endExp should be 0', function() {
+            expect(run.endExp).toBe(0);
+        });
+
         describe('when starting run', function() {
             var startExp = 500;
             var startTime = new Date();
 
             beforeEach(function () {
-                run.start(startExp, startTime);
+                run.startExp = startExp;
+                run.start(startTime);
             });
 
             it('should set start exp', function() {
@@ -49,6 +62,10 @@ describe('Run test', function() {
                 expect(run.startTime).toBe(startTime);
             });
 
+            it('isRunning should be true', function() {
+                expect(run.isRunning).toBe(true);
+            });
+
             describe('when ending run', function() {
                 var endExp = 750;
                 var endTime;
@@ -57,7 +74,8 @@ describe('Run test', function() {
                 
                 beforeEach(function() {
                     endTime = moment(startTime).clone().add('hours', 1).toDate();
-                    run.end(endExp, endTime, essences, tears);
+                    run.endExp = endExp;
+                    run.end(endTime, essences, tears);
                 });
 
                 it('should set end exp', function() {
@@ -79,6 +97,10 @@ describe('Run test', function() {
 
                 it('should calculate tears per hour', function() {
                     expect(run.tearsPerHour).toBe(tears);
+                });
+
+                it('isRunning should be false', function() {
+                    expect(run.isRunning).toBe(false);
                 });
             });
         });

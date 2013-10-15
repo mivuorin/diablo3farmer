@@ -4,7 +4,6 @@ angular.module('Diablo3Farmer.Controllers', [])
     .controller('FarmRunController', ['$scope', 'dateService', 'runStorageService', function($scope, dateService, runStorageService) {
 
         $scope.monsterPowerLevels = ['MP01', 'MP02', 'MP03', 'MP04', 'MP05', 'MP06', 'MP07', 'MP08', 'MP09', 'MP10'];
-        $scope.selectedMonsterPowerLevel = $scope.monsterPowerLevels[0];
 
         $scope.acts = [
             { name: 'Act 1', value: 1, },
@@ -12,58 +11,38 @@ angular.module('Diablo3Farmer.Controllers', [])
             { name: 'Act 3', value: 3, },
             { name: 'Act 4', value: 4, }
         ];
-        $scope.selectedAct = $scope.acts[0];
 
         $scope.runs = runStorageService.load();
-        $scope.name = '';
-        $scope.currentRun = null;
-        
-        $scope.runStarted = function() {
-            return $scope.currentRun !== null;
-        };
+        $scope.run = new Run('', $scope.monsterPowerLevels[0], $scope.acts[0]); // TODO untested code. should use factory to create run? or load previous run from storage
 
-        $scope.gridOptions = {
-            data: 'runs',
-            columnDefs: [
-                { field: 'name', displayName: 'Run name' },
-                { field: 'monsterPowerLevel', displayName: 'MP' },
-                { field: 'act', displayName: 'Act' },
-                { field: 'startExp', displayName: 'Start exp', cellFilter: "number:0" },
-                { field: 'endExp', displayName: 'End exp', cellFilter: "number:0" },
-                { field: 'expPerHour', displayName: 'Exp / hour', cellFilter: "number:0" }
-            ]
-        };
-
-        $scope.startRun = function () {
-            var run = new Run($scope.name, $scope.selectedMonsterPowerLevel, $scope.selectedAct);
-            run.start($scope.startExp, dateService.now());
-            $scope.currentRun = run;
-            $scope.endExp = $scope.startExp;
+        $scope.startRun = function() {
+            $scope.run.start(dateService.now());
+            
+            // TODO move logic to run?
+            $scope.run.endExp = $scope.run.startExp;
             $scope.essences = 0;
             $scope.tears = 0;
         };
 
         $scope.endRun = function() {
-            var run = $scope.currentRun;
-            run.end($scope.endExp, dateService.now(), $scope.essences, $scope.tears);
+            $scope.run.end(dateService.now(), $scope.essences, $scope.tears);
 
-            $scope.runs.push(run);
-            
+            // Save copy of binded run
+            $scope.runs.push(angular.copy($scope.run));
             runStorageService.save($scope.runs);
-            
-            $scope.currentRun = null;
-            $scope.startExp = $scope.endExp;
+
+            $scope.run.startExp = $scope.run.endExp;     // TODO move logic to run?
         };
 
-        $scope.getRunNames = function () {
+        $scope.getRunNames = function() {
             var groups = _.groupBy($scope.runs, function(run) {
                 return run.name;
             });
             return _.keys(groups);
         };
 
-        $scope.removeRun = function(run) {
-            $scope.runs.splice($scope.runs.indexOf(run), 1);
+        $scope.removeRun = function(_run) {
+            $scope.runs.splice($scope.runs.indexOf(_run), 1);
             runStorageService.save($scope.runs);
         };
     }]);

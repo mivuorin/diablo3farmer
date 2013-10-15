@@ -18,31 +18,31 @@
                 <div class="col-md-12">
                     <div class="controls">
                         
-                        <form name="startForm" ng-show="!runStarted()" novalidate ng-submit="startRun()" class="form-inline" >
+                        <form name="startForm" ng-show="!run.isRunning" novalidate ng-submit="startRun()" class="form-inline" >
                             <div class="form-group input-group-sm" ng-class="{'has-error': startForm.name.$invalid && startForm.name.$dirty}">
                                 <label for="name" class="control-label">Name:</label>
-                                <input id="name" name="name" type="text" ng-model="name" typeahead="name for name in getRunNames() | filter:$viewValue" d3-auto-select
+                                <input id="name" name="name" type="text" ng-model="run.name" typeahead="name for name in getRunNames() | filter:$viewValue" d3-auto-select
                                     required class="form-control col-md-3"  />
                             </div>
                             <div class="form-group input-group-sm">
                                 <label for="selectedMonsterPowerLevel" class="control-label">MP:</label>
-                                <select id="selectedMonsterPowerLevel" class="form-control" ng-model="selectedMonsterPowerLevel" ng-options="mp for mp in monsterPowerLevels"></select>
+                                <select id="selectedMonsterPowerLevel" class="form-control" ng-model="run.monsterPowerLevel" ng-options="mp for mp in monsterPowerLevels"></select>
                             </div>
                             <div class="form-group input-group-sm">
                                 <label for="selectedAct" class="control-label">Act:</label>
-                                <select id="selectedAct" class="form-control" ng-model="selectedAct" ng-options="act as act.name for act in acts"></select>
+                                <select id="selectedAct" class="form-control" ng-model="run.act" ng-options="act as act.name for act in acts"></select>
                             </div>
                             <div class="form-group input-group-sm" ng-class="{'has-error': startForm.startExp.$invalid && startForm.startExp.$dirty}" >
                                 <label for="startExp" class="control-label">Start Exp:</label>
-                                <input id="startExp" name="startExp" type="number" ng-model="startExp" class="form-control" d3-auto-select required min="0" />
+                                <input id="startExp" name="startExp" type="number" ng-model="run.startExp" class="form-control" d3-auto-select required min="0" />
                             </div>
                             <button type="submit" class="btn btn-default btn-sm" ng-disabled="startForm.$invalid">Start</button>
                         </form>
 
-                        <form name="endForm" ng-show="runStarted()" class="form-inline" novalidate>
+                        <form name="endForm" ng-show="run.isRunning" class="form-inline" novalidate>
                             <div class="form-group input-group-sm" ng-class="{'has-error': endForm.endExp.$invalid && endForm.endExp.$dirty}">
                                 <label for="endExp">End exp:</label>
-                                <input id="endExp" name="endExp" type="number" ng-model="endExp" class="form-control" d3-auto-select required min="0" />
+                                <input id="endExp" name="endExp" type="number" ng-model="run.endExp" class="form-control" d3-auto-select required min="0" />
                             </div>
                             <div class="form-group input-group-sm">
                                 <label for="essences" class="control-label">Essences:</label>

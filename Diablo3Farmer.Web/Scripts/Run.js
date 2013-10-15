@@ -6,14 +6,18 @@ function Run(name, monsterPowerLevel, act) {
     this.monsterPowerLevel = monsterPowerLevel;
     this.act = act;
     this.expPerHour = 0;
+    this.isRunning = false;
 
-    this.start = function(startExp, startTime) {
-        self.startExp = startExp;
+    this.startExp = 0;
+    this.endExp = 0;
+
+    this.start = function(startTime) {
         self.startTime = startTime;
+        self.isRunning = true;
     };
 
-    this.end = function (endExp, endTime, essences, tears) {
-        self.endExp = endExp;
+    this.end = function (endTime, essences, tears) {
+        self.isRunning = false;
         self.endTime = endTime;
         self.time = moment(self.endTime).diff(self.startTime);
         self.expPerHour = calculatePerHour(self.endExp - self.startExp);
