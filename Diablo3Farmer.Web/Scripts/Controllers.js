@@ -24,7 +24,9 @@ angular.module('Diablo3Farmer.Controllers', [])
             $scope.tears = 0;
         };
 
-        $scope.endRun = function() {
+        $scope.endRun = function () {
+            //paragonLevelService.getTotalExp(startLevel, endLevel);
+
             $scope.run.end(dateService.now(), $scope.essences, $scope.tears);
 
             // Save copy of binded run
