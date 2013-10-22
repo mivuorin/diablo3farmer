@@ -32,6 +32,10 @@
                                 <label for="selectedAct" class="control-label">Act:</label>
                                 <select id="selectedAct" class="form-control" ng-model="run.act" ng-options="act as act.name for act in acts"></select>
                             </div>
+                            <div class="form-group input-group-sm">
+                                <label for="startLevel" class="control-label">Level:</label>
+                                <select id="startLevel" class="form-control" ng-model="startLevel" ng-options="level as level.name for level in levels"></select>
+                            </div>
                             <div class="form-group input-group-sm" ng-class="{'has-error': startForm.startExp.$invalid && startForm.startExp.$dirty}" >
                                 <label for="startExp" class="control-label">Start Exp:</label>
                                 <input id="startExp" name="startExp" type="number" ng-model="run.startExp" class="form-control" d3-auto-select required min="0" />
@@ -40,6 +44,10 @@
                         </form>
 
                         <form name="endForm" ng-show="run.isRunning" class="form-inline" novalidate>
+                            <div class="form-group input-group-sm">
+                                <label for="endLevel" class="control-label">Level:</label>
+                                <select id="endLevel" class="form-control" ng-model="endLevel" ng-options="level as level.name for level in levels"></select>
+                            </div>
                             <div class="form-group input-group-sm" ng-class="{'has-error': endForm.endExp.$invalid && endForm.endExp.$dirty}">
                                 <label for="endExp">End exp:</label>
                                 <input id="endExp" name="endExp" type="number" ng-model="run.endExp" class="form-control" d3-auto-select required min="0" />

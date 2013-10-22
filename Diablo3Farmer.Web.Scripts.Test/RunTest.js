@@ -45,6 +45,10 @@ describe('Run test', function() {
             expect(run.endExp).toBe(0);
         });
 
+        it('expFromLevels should be 0', function() {
+            expect(run.expFromLevels).toBe(0);
+        });
+
         describe('when starting run', function() {
             var startExp = 500;
             var startTime = new Date();
@@ -67,6 +71,7 @@ describe('Run test', function() {
             });
 
             describe('when ending run', function() {
+                var expFromLevels = 250;
                 var endExp = 750;
                 var endTime;
                 var essences = 205;
@@ -75,6 +80,7 @@ describe('Run test', function() {
                 beforeEach(function() {
                     endTime = moment(startTime).clone().add('hours', 1).toDate();
                     run.endExp = endExp;
+                    run.expFromLevels = expFromLevels;
                     run.end(endTime, essences, tears);
                 });
 
@@ -83,7 +89,7 @@ describe('Run test', function() {
                 });
 
                 it('should calculate exp per hour', function() {
-                    expect(run.expPerHour).toBe(250);
+                    expect(run.expPerHour).toBe(500);
                 });
 
                 it('should calculate run time', function () {

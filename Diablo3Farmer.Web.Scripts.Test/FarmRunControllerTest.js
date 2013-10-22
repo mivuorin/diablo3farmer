@@ -3,7 +3,8 @@
 /// <reference path="../diablo3farmer.web/scripts/lib/angular-1.2.0-rc.2/angular-mocks.js" />
 /// <reference path="../diablo3farmer.web/scripts/lib/underscore/underscore.js" />
 /// <reference path="../diablo3farmer.web/scripts/controllers.js" />
-/// <reference path="../Diablo3Farmer.Web/Scripts/Run.js" />
+/// <reference path="../diablo3farmer.web/scripts/services.js" />
+/// <reference path="../Diablo3Farmer.Web/scripts/run.js" />
 
 'use strict';
 //Prevents jasmine to notify ReSharper for end of test run. Can be used on debuggin purposes.
@@ -11,17 +12,28 @@
 
 describe('FarmRunController', function() {
     var scope;
-    var dateServiceSpy = jasmine.createSpyObj('dateService', ['now']);
-    var runStorageServiceSpy = jasmine.createSpyObj('runStorageService', ['load', 'save']);
+    var dateServiceSpy;
+    var runStorageServiceSpy;
+    var paragonLevelServiceSpy;
+    var defaultLevel = { name: '00' };
 
     beforeEach(function() {
         module('Diablo3Farmer.Controllers');
+        module('Diablo3Farmer.Services');
+        
         module(function($provide) {
             $provide.value('dateService', dateServiceSpy);
             $provide.value('runStoreService', runStorageServiceSpy);
+            $provide.value('paragonLevelService', paragonLevelServiceSpy);
         });
         
+        dateServiceSpy = jasmine.createSpyObj('dateService', ['now']);
+        
+        runStorageServiceSpy = jasmine.createSpyObj('runStorageService', ['load', 'save']);
         runStorageServiceSpy.load.andReturn([]);
+        
+        paragonLevelServiceSpy = jasmine.createSpyObj('paragonLevelService', ['getLevels', 'getRequiredExp']);
+        paragonLevelServiceSpy.getLevels.andReturn([defaultLevel]);
     });
 
     function createController() {
@@ -30,11 +42,12 @@ describe('FarmRunController', function() {
             $controller('FarmRunController', {
                 $scope: scope,
                 dateService: dateServiceSpy,
-                runStorageService: runStorageServiceSpy
+                runStorageService: runStorageServiceSpy,
+                paragonLevelService: paragonLevelServiceSpy
             });
         });
     }
-
+    
     describe('creating controller', function() {
         var runSpy;
         var newRunSpy;
@@ -58,13 +71,27 @@ describe('FarmRunController', function() {
             expect(newRunSpy).toHaveBeenCalledWith('', scope.monsterPowerLevels[0], scope.acts[0]);
         });
 
+        it('should get paragonLevels', function() {
+            expect(paragonLevelServiceSpy.getLevels).toHaveBeenCalled();
+        });
+        
+        it('should set default paragon start level', function() {
+            expect(scope.startLevel).toBe(defaultLevel);
+        });
+
+        it('should set default paragon end level', function() {
+            expect(scope.endLevel).toBe(defaultLevel);
+        });
+
         describe('starting new run', function() {
 
             var startExp = 250;
             var startTime = Date.now();
+            var startLevel = { name: '02' };
 
             beforeEach(function() {
                 dateServiceSpy.now.andReturn(startTime);
+                scope.startLevel = startLevel;
                 scope.run.startExp = startExp;
                 scope.startRun();
             });
@@ -85,14 +112,23 @@ describe('FarmRunController', function() {
                 expect(scope.tears).toBe(0);
             });
 
+            it('should set endLevel to startLevel', function () {
+                expect(scope.endLevel).toEqual(startLevel);
+            });
+
             describe('when ending farming run', function() {
                 var endTime = Date.now();
                 var endExp = 500;
                 var essences = 105;
                 var tears = 354;
+                var expFromLevels = 5454;
+                var endLevel = { name: '03' };
                 
                 beforeEach(function() {
                     dateServiceSpy.now.andReturn(endTime);
+                    paragonLevelServiceSpy.getRequiredExp.andReturn(expFromLevels);
+                    
+                    scope.endLevel = endLevel;
                     scope.endExp = endExp;
                     scope.essences = essences;
                     scope.tears = tears;
@@ -113,6 +149,18 @@ describe('FarmRunController', function() {
 
                 it('should add run to runs array', function() {
                     expect(scope.runs.length).toBe(1);
+                });
+
+                it('should get required exp from paragon levels', function() {
+                    expect(paragonLevelServiceSpy.getRequiredExp).toHaveBeenCalledWith(startLevel, endLevel);
+                });
+
+                it('should calculate runs exp from paragon levels', function() {
+                    expect(scope.run.expFromLevels).toBe(expFromLevels);
+                });
+
+                it('should set start paragon level to end paragon level', function() {
+                    expect(scope.startLevel).toBe(scope.endLevel);
                 });
             });
         });

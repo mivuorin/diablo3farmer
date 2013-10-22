@@ -18,8 +18,8 @@ angular.module('Diablo3Farmer.Services', [])
     }])
     .factory('paragonLevelService', [function() {
         var levels = [];
-        levels.push({ requiredExp: 7200000 });
-        for (var level = 1; level < 100; level++) {
+        levels.push({ name: '0', requiredExp: 7200000 });
+        for (var level = 1; level <= 100; level++) {
 
             var rate = 1440000;
             if (level >= 60 && level <= 69) {
@@ -34,14 +34,15 @@ angular.module('Diablo3Farmer.Services', [])
 
             var prev = levels[level - 1].requiredExp;
             var requiredExp = prev + rate;
-            levels.push({ requiredExp: requiredExp });
+            levels.push({ name: level + '', requiredExp: requiredExp });
         }
 
         return {
             getLevels: function() {
                 return levels;
             },
-            getTotalExp: function(startLevel, endLevel) {
+            getRequiredExp: function (startLevel, endLevel) {
+                /// Calculates exp required from start level to end level
                 var levelCount = _.indexOf(levels, endLevel) - _.indexOf(levels, startLevel);
                 return _.chain(levels)
                     .rest(_.indexOf(levels, startLevel))
